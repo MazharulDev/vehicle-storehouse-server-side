@@ -38,6 +38,20 @@ async function run(){
             const item= await itemCollection.findOne(query);
             res.send(item);
           })
+          // update quantity
+          app.put('/item/:id',async(req,res)=>{
+              const id=req.params.id;
+              const updateQuantity=req.body;
+              const filter={_id:ObjectId(id)};
+              const options={upsert: true};
+              const updateDoc={
+                  $set:{
+                      quantityNumber:updateQuantity.quantityNumber
+                  }
+              };
+              const result=await itemCollection.updateOne(filter,updateDoc,options);
+              res.send(result);  
+          })
     }
     finally{
 
