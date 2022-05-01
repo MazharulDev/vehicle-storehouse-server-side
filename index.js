@@ -66,6 +66,13 @@ async function run(){
             const result=await itemCollection.updateOne(filter,updateDoc,options);
             res.send(result);  
         })
+        // delete api
+        app.delete('/item/:id',async(req,res)=>{
+            const id=req.params.id;
+            const query={_id:ObjectId(id)};
+            const result=await itemCollection.deleteOne(query);
+            res.send(result)
+        })
     }
     finally{
 
