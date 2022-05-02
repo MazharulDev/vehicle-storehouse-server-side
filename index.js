@@ -25,6 +25,14 @@ async function run(){
             const items=await cursor.toArray();
             res.send(items);
         })
+        // email get
+        app.get('/item', async(req,res)=>{
+            const email=req.query.email;
+            const query={email: email};
+            const cursor=itemCollection.find(query);
+            const items= await cursor.toArray();
+            res.send(items);
+        })
         //post item
         app.post('/item', async(req,res)=>{
             const newItem=req.body;
